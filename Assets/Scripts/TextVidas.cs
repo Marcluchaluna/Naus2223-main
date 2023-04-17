@@ -16,7 +16,7 @@ public class TextVidas : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        textoVidas.text = "Vidas:" + vidas;
     }
 
     // Update is called once per frame
@@ -27,15 +27,22 @@ public class TextVidas : MonoBehaviour
     public void ActualizarVidas()
     {
         vidas--;
+        textoVidas.text = "Vidas:" + vidas;
         if (vidas == 0)
         {
-            
-
-
-            _gameManager.GetComponent<GameManager>().PassarAGameOver();
-            // La nave ha perdido todas sus vidas
-            // Aquí puedes destruir la nave o mostrar una pantalla de game over
+            GameObject.Find("GameManager").GetComponent<GameManager>().PassarAGameOver();
         }
+        
+    }
+    public void SumarExtra()
+    {
+        vidas++;
         textoVidas.text = "Vidas:" + vidas;
+    }
+    public void InicialitzarVidas()
+    {
+        vidas = 3;
+        textoVidas.text = "Vidas:" + vidas;
+
     }
 }

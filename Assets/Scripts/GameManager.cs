@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour
     public GameObject _nauJugador;
     public GameObject _generadorEnemics;
     public GameObject _textPuntsJugador;
+    public GameObject _vidaExtra;
+    public GameObject _vidasText;
 
     public enum EstatsGameManager
     {
@@ -39,7 +41,9 @@ public class GameManager : MonoBehaviour
                 _botoJugar.SetActive(true);
                 _nauJugador.SetActive(false);
                 _textPuntsJugador.GetComponent<TextPuntsJugador>().InicialitzarPunts();
+                _vidasText.GetComponent<TextVidas>().InicialitzarVidas();
                 _textPuntsJugador.SetActive(false);
+                _vidasText.SetActive(false);
 
                 break;
 
@@ -48,7 +52,9 @@ public class GameManager : MonoBehaviour
                 _botoJugar.SetActive(false);
                 _nauJugador.SetActive(true);
                 _textPuntsJugador.SetActive(true);
+                _vidasText.SetActive(true);
                 _generadorEnemics.GetComponent<GeneradorEnemics>().IniciGeneraEnemics();
+                _vidaExtra.GetComponent<GeneradorVidaExtra>().IniciGeneraVidaExtra();
 
                 break;
 
@@ -58,6 +64,8 @@ public class GameManager : MonoBehaviour
                 _nauJugador.SetActive(false);
                 _textPuntsJugador.SetActive(true);
                 _generadorEnemics.GetComponent<GeneradorEnemics>().AturaGenerarEnemics();
+                _vidaExtra.GetComponent<GeneradorVidaExtra>().AturaGenerarVidaExtra();
+                
 
                 Invoke("PassarAEstatInici", 3f);
 

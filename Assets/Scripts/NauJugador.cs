@@ -12,6 +12,7 @@ public class NauJugador : MonoBehaviour
     public GameManager _gameManager;
 
 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -68,14 +69,43 @@ public class NauJugador : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D objecteTocat)
     {
-        if (objecteTocat.tag == "Enemic")
+        if (objecteTocat.tag == "Enemic" || objecteTocat.tag == "ProjectilEnemic")
         {
 
 
-            GameObject.Find("TextVidas").GetComponent<TextVidas>().ActualizarVidas();
+            GameObject.Find("Vidas").GetComponent<TextVidas>().ActualizarVidas();
 
             GameObject explosio = Instantiate(_ExplosioPrefab);
             explosio.transform.position = transform.position;
+            if (GameObject.Find("Vidas").GetComponent<TextVidas>().vidas == 0)
+            {
+
+
+
+                _gameManager.GetComponent<GameManager>().PassarAGameOver();
+                // La nave ha perdido todas sus vidas
+                // Aquí puedes destruir la nave o mostrar una pantalla de game over
+            }
+            else
+            {
+                gameObject.SetActive(false);
+                GameObject.Find("GeneradorEnemics").GetComponent<GeneradorEnemics>().CancelInvoke();
+                Invoke("GenerarNau", 3f);
+
+            }
         }
+        if (objecteTocat.tag == "VidaExtra")
+        {
+            GameObject.Find("Vidas").GetComponent<TextVidas>().SumarExtra();
+
+        }
+    }
+
+    public void GenerarNau()
+    {
+        gameObject.SetActive(true);
+        gameObject.transform.position =new(0f,0f);
+        GameObject.Find("GeneradorEnemics").GetComponent<GeneradorEnemics>().IniciGeneraEnemics();
+
     }
 }

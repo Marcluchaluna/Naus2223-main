@@ -37,7 +37,7 @@ public class GeneradorEnemics : MonoBehaviour
         // Param1: Nom mètode a cridar.
         // Param2: temps fins a cridar-se.
         // Param3: temps entre repeticions
-        InvokeRepeating("CreaEnemic", 2f, 1f);
+        InvokeRepeating("CreaEnemic", 2f, 2.5f);
     }
 
     public void AturaGenerarEnemics()
